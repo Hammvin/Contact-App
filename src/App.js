@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import {Routes, Route} from 'react-router-dom';
+import {ContactContext} from './Components/ContactContext'
+import {useState} from 'react';
+import ContactList from './Components/ContactList';
+import Header from './Components/Header';
+import AddContact from './Components/AddContact';
 
 function App() {
+  const initialValues = {name:"", phone: "", email: ""};
+  const [Contacts, setContacts] = useState(initialValues);
+ 
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ContactContext.Provider value={{Contacts, setContacts, initialValues}}>
+        <Header />
+        <AddContact />
+        <ContactList />
+      </ContactContext.Provider>
     </div>
   );
 }
